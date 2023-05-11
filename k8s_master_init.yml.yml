@@ -2,29 +2,18 @@
 # k8s_master_init.yml
 
 - hosts: masters
-  remote_user: k8s5gc
+  remote_user: mousse
   become: yes
   become_method: sudo
   become_user: root
   gather_facts: yes
   connection: ssh
 
-  vars_prompt:
+  vars:
 
-   - name: "pod_network_cidr"
-     prompt: "Enter the Pod Network CIDR, example: 192.168.100.0/24"
-     private: no
-
-   - name: "k8s_master_ip"
-     prompt: "Enter the Apiserver advertise address, example: 192.168.56.10"     private: no
-
-   - name: "pod_network_manifest_file"
-     prompt: "Enter the Pod network manifest file URL, Your choice could be flannel, weave or calico, etc."
-     private: no
-
-   - name: "rbac_manifest_file"
-     prompt: "Enter the RBAC manifest file URL"
-     private: no
+   pod_network_cidr: "192.168.0.0/16"
+   k8s_master_ip: "192.168.56.10/24"
+   pod_network_manifest_file: "https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml"
 
 
   tasks:
@@ -76,7 +65,6 @@
      command: "{{ item }}"
      with_items:
         - kubectl apply -f {{ pod_network_manifest_file }}
-        - kubectl apply -f {{ rbac_manifest_file }}
 
    - pause: seconds=30
 
