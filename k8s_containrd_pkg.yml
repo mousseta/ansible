@@ -97,15 +97,6 @@
      when: containerd_config_default_write and containerd_config_cgroup_driver_systemd
      changed_when: false
 
-  - name: Make sure  SystemdCgroup = false is not set
-    ansible.builtin.lineinfile:
-      path: /etc/containerd/config.toml
-      state: absent
-      line: '            SystemdCgroup = false'
-    notify: restart containerd
-    when: containerd_config_default_write and containerd_config_cgroup_driver_systemd
-    changed_when: false
-
    - name: Enable containerd service, and start it.
      systemd: 
        name: containerd
