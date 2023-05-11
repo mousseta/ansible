@@ -94,8 +94,6 @@
        line: '          SystemdCgroup = true'
        state: present
        path: /etc/containerd/config.toml
-     when: containerd_config_default_write and containerd_config_cgroup_driver_systemd
-     changed_when: false
 
    - name: Enable containerd service, and start it.
      systemd: 
