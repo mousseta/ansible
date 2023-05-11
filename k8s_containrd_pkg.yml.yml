@@ -2,7 +2,7 @@
 # k8s_containrd_pkg.yml
 ---
 - hosts: "masters, workers"
-  remote_user: k8s5gc
+  remote_user: mousse
   become: yes
   become_method: sudo
   become_user: root
