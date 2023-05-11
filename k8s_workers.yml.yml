@@ -2,7 +2,7 @@
 # k8s_workers.yml
 ---
 - hosts: masters
-  remote_user: k8s5gc
+  remote_user: mousse
   become: yes
   become_method: sudo
   become_user: root
@@ -24,7 +24,7 @@
 
 
 - hosts: workers
-  remote_user: k8s5gc
+  remote_user: mousse
   become: yes
   become_method: sudo
   become_user: root
